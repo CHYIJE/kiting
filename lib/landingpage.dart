@@ -27,7 +27,7 @@ class _LandingPageState extends State<LandingPage> {
         children: [Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Image.asset('assets/image/landing.png',fit:  BoxFit.cover,)
+            child: Image.asset('assets/image/landing.png',fit:  BoxFit.contain,)
 
           ),
           CircularProgressIndicator()
