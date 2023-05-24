@@ -9,7 +9,7 @@ class _HomeScreenState extends State<HomeScreen>  {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:  Text("홈스크린입니다."),
+      child:  Text("매칭화면."),
     );
   }
 }

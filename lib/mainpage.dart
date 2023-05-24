@@ -39,7 +39,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
      return Scaffold(
-       appBar:  AppBar(title: Text('KITing'),),
+       appBar:  AppBar(
+         title: Text('KITing',style: TextStyle(fontFamily:'NanumDelicious',fontSize: 30,color: Colors.white),),
+         centerTitle: true,
+         backgroundColor: Colors.red,
+       ),
        bottomNavigationBar: BottomNavigationBar(
          type:  BottomNavigationBarType.fixed,
          backgroundColor: Colors.white, //bar 배경색

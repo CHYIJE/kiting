@@ -9,7 +9,7 @@ class _MyScreenState extends State<MyScreen>  {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:  Text("내가 올린거."),
+      child:  Text("내정보."),
     );
   }
 }

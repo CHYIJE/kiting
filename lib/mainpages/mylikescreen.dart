@@ -9,7 +9,7 @@ class _MylikeScreenState extends State<MylikeScreen>  {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:  Text("좋아요한 페이지."),
+      child:  Text("like 모음."),
     );
   }
 }
