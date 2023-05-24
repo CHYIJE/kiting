@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
      return Scaffold(
        appBar:  AppBar(
-         title: Text('KITing',style: TextStyle(fontFamily:'NanumDelicious',fontSize: 30,color: Colors.white),),
+         title: Text('KITing',style: TextStyle(fontFamily:'NanumPenScript',fontSize: 30,color: Colors.white),),
          centerTitle: true,
          backgroundColor: Colors.red,
        ),
