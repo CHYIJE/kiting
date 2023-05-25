@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:kiting/mainpage.dart';
 import 'login_page.dart';
 
+
 class LandingPage extends StatefulWidget {
   @override
   _LandingPageState createState() => _LandingPageState();
