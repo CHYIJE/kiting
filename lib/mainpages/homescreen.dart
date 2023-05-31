@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kiting/mainpages/showgridscreen.dart';
 import 'package:kiting/mainpages/mylikescreen.dart';
+import 'dart:math';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,50 +9,90 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> likedImages = [];
+
+  List<String> imagePaths = [
+    '0.jpg',
+    '1.jpg',
+    '2.jpg',
+    '3.jpg',
+    '4.jpg',
+    '5.jpg',
+  ];
+
+  String getRandomImagePath() {
+    Random random = Random();
+    int index = random.nextInt(imagePaths.length);
+    String imagePath = 'assets/image/${imagePaths[index]}';
+    return imagePath;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    String secondImagePath =
+    likedImages.isNotEmpty ? likedImages.last : getRandomImagePath();
+
+    return Scaffold(
+      body: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Column(
             children: [
-              // 첫 번째 사진
-              Image.asset(
-                'assets/image/man.jpg',
-                width: 400 , // 원하는 너비로 조정
-                height: 500, // 원하는 높이로 조정
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // 첫 번째 사진
+                  Container(
+                    width: 450, // 이미지의 고정된 너비
+                    height: 450, // 이미지의 고정된 높이
+                    child: Image.asset(
+                      'assets/image/man.jpg',
+                      fit: BoxFit.contain, // 이미지의 비율을 유지한 채로 화면에 맞춤
+                    ),
+                  ),
+                  // 두 번째 사진
+                  Container(
+                    width: 400, // 이미지의 고정된 너비
+                    height: 400, // 이미지의 고정된 높이
+                    child: Image.asset(
+                      secondImagePath,
+                      fit: BoxFit.contain, // 이미지의 비율을 유지한 채로 화면에 맞춤
+                    ),
+                  ),
+                ],
               ),
-              // 두 번째 사진
-              Image.asset(
-                'assets/image/girl.jpg',
-                width: 400, // 원하는 너비로 조정
-                height: 500, // 원하는 높이로 조정
+              SizedBox(height: 50), // 사진과 버튼 사이의 간격 조절을 위한 SizedBox 추가
+              // chat 버튼
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ShowGridScreen()),
+                  );
+                },
+                child: Text('Chat'),
+              ),
+              SizedBox(height: 20), // 버튼과 버튼 사이의 간격 조절을 위한 SizedBox 추가
+              // like 버튼
+              ElevatedButton(
+                onPressed: () {
+                  String imagePath = getRandomImagePath();
+                  setState(() {
+                    likedImages.add(imagePath);
+                    secondImagePath = imagePath;
+                  });
+                },
+                child: Text('Like'),
               ),
             ],
           ),
-          SizedBox(height: 50), // 사진과 버튼 사이의 간격 조절을 위한 SizedBox 추가
-          // chat 버튼
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ShowGridScreen()),
-              );
-            },
-            child: Text('Chat'),
-          ),
-          SizedBox(height: 20), // 버튼과 버튼 사이의 간격 조절을 위한 SizedBox 추가
-          // like 버튼
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MylikeScreen()),
-              );
-            },
-            child: Text('Like'),
-          ),
+          if (likedImages.isNotEmpty)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: MylikeScreen(likedImages),
+            ),
         ],
       ),
     );

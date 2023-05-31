@@ -5,14 +5,13 @@ import 'package:kiting/mainpages/myscreen.dart';
 import 'package:kiting/mainpages/showgridscreen.dart';
 
 class MainPage extends StatefulWidget {
-
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  int _selectedIndex=0;
-  List<BottomNavigationBarItem> bottomItems=[
+  int _selectedIndex = 0;
+  List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(
       label: '홈',
       icon: Icon(Icons.home_filled),
@@ -30,40 +29,42 @@ class _MainPageState extends State<MainPage> {
       icon: Icon(Icons.account_circle),
     ),
   ];
-  List pages=[
+  List pages = [
     HomeScreen(),
     ShowGridScreen(),
-    MylikeScreen(),
+    MylikeScreen([]), // 수정: 빈 리스트 전달
     MyScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-       appBar:  AppBar(
-         title: Text('KITing',style: TextStyle(fontFamily:'NanumPenScript',fontSize: 30,color: Colors.white),),
-         centerTitle: true,
-         backgroundColor: Colors.red,
-       ),
-       bottomNavigationBar: BottomNavigationBar(
-         type:  BottomNavigationBarType.fixed,
-         backgroundColor: Colors.white, //bar 배경색
-         selectedItemColor: Colors.black, // 선택된 색상
-         unselectedItemColor: Colors.grey.withOpacity(.60),  //선택 안된거 색상
-         selectedFontSize: 14,  //선택된거의 폰트 크기
-         unselectedFontSize: 10, // 선택 안된거의 폰트 크기
-         currentIndex: _selectedIndex,
-
-         showSelectedLabels: false,    //라벨 안보이기
-         showUnselectedLabels: false,
-
-         onTap: (int index) {
-           setState(() {
-             _selectedIndex = index;
-           });
-         },
-         items:bottomItems,
-       ),
-       body: pages[_selectedIndex],
-     );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'KITing',
+          style: TextStyle(fontFamily: 'NanumPenScript', fontSize: 30, color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.red,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white, //bar 배경색
+        selectedItemColor: Colors.black, // 선택된 색상
+        unselectedItemColor: Colors.grey.withOpacity(.60), //선택 안된거 색상
+        selectedFontSize: 14, //선택된거의 폰트 크기
+        unselectedFontSize: 10, // 선택 안된거의 폰트 크기
+        currentIndex: _selectedIndex,
+        showSelectedLabels: false, //라벨 안보이기
+        showUnselectedLabels: false,
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: bottomItems,
+      ),
+      body: pages[_selectedIndex],
+    );
   }
 }
