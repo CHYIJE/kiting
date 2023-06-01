@@ -10,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> likedImages = [];
-
   List<String> imagePaths = [
     '0.jpg',
     '1.jpg',
@@ -19,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
     '4.jpg',
     '5.jpg',
   ];
+  String firstImagePath = 'assets/image/man.jpg';
+  String secondImagePath = '';
 
   String getRandomImagePath() {
     Random random = Random();
@@ -28,10 +29,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    String secondImagePath =
-    likedImages.isNotEmpty ? likedImages.last : getRandomImagePath();
+  void initState() {
+    super.initState();
+    secondImagePath = getRandomImagePath();
+  }
 
+  void updateSecondImagePath() {
+    String imagePath = getRandomImagePath();
+    setState(() {
+      secondImagePath = imagePath;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
@@ -45,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 450, // 이미지의 고정된 너비
                     height: 450, // 이미지의 고정된 높이
                     child: Image.asset(
-                      'assets/image/man.jpg',
+                      firstImagePath,
                       fit: BoxFit.contain, // 이미지의 비율을 유지한 채로 화면에 맞춤
                     ),
                   ),
@@ -75,10 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
               // like 버튼
               ElevatedButton(
                 onPressed: () {
-                  String imagePath = getRandomImagePath();
+                  String imagePath = secondImagePath;
                   setState(() {
                     likedImages.add(imagePath);
-                    secondImagePath = imagePath;
+                    updateSecondImagePath();
                   });
                 },
                 child: Text('Like'),
@@ -87,10 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           if (likedImages.isNotEmpty)
             Positioned(
-              top: 0,
+              bottom: 0,
               left: 0,
               right: 0,
-              bottom: 0,
               child: MylikeScreen(likedImages),
             ),
         ],
