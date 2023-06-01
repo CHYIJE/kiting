@@ -11,6 +11,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  List<String> likedImages = [];
   List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(
       label: '홈',
@@ -29,12 +30,18 @@ class _MainPageState extends State<MainPage> {
       icon: Icon(Icons.account_circle),
     ),
   ];
-  List pages = [
-    HomeScreen(),
-    ShowGridScreen(),
-    MylikeScreen([]), // 수정: 빈 리스트 전달
-    MyScreen(),
-  ];
+  List<Widget> pages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [
+      HomeScreen(likedImages),
+      ShowGridScreen(),
+      MylikeScreen(likedImages),
+      MyScreen(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +49,24 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text(
           'KITing',
-          style: TextStyle(fontFamily: 'NanumPenScript', fontSize: 30, color: Colors.white),
+          style: TextStyle(
+            fontFamily: 'NanumPenScript',
+            fontSize: 30,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.red,
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white, //bar 배경색
-        selectedItemColor: Colors.black, // 선택된 색상
-        unselectedItemColor: Colors.grey.withOpacity(.60), //선택 안된거 색상
-        selectedFontSize: 14, //선택된거의 폰트 크기
-        unselectedFontSize: 10, // 선택 안된거의 폰트 크기
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey.withOpacity(.60),
+        selectedFontSize: 14,
+        unselectedFontSize: 10,
         currentIndex: _selectedIndex,
-        showSelectedLabels: false, //라벨 안보이기
+        showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: (int index) {
           setState(() {

@@ -4,12 +4,16 @@ import 'package:kiting/mainpages/mylikescreen.dart';
 import 'dart:math';
 
 class HomeScreen extends StatefulWidget {
+  List<String> likedImages;
+
+  HomeScreen(List<String> this.likedImages);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> likedImages = [];
+  // List<String> likedImages = this.likedImages;
   List<String> imagePaths = [
     '0.jpg',
     '1.jpg',
@@ -88,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   String imagePath = secondImagePath;
                   setState(() {
-                    likedImages.add(imagePath);
+                    widget.likedImages.add(imagePath);
                     updateSecondImagePath();
                   });
                 },
@@ -96,12 +100,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          if (likedImages.isNotEmpty)
+          if (widget.likedImages.isNotEmpty)
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: MylikeScreen(likedImages),
+              child: MylikeScreen(widget.likedImages),
             ),
         ],
       ),

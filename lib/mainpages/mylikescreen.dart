@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kiting/mainpages/showgridscreen.dart';
 
-class MylikeScreen extends StatelessWidget {
+class MylikeScreen extends StatefulWidget {
   final List<String> likedImages;
 
   MylikeScreen(this.likedImages);
+
+  @override
+  State<MylikeScreen> createState() => _MylikeScreenState();
+}
+
+class _MylikeScreenState extends State<MylikeScreen> {
 
   void _removeImage(BuildContext context, String imagePath) {
     showDialog(
@@ -34,6 +40,9 @@ class MylikeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    print(widget.likedImages);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('My Likes'),
@@ -42,11 +51,11 @@ class MylikeScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: likedImages.length,
+              itemCount: widget.likedImages.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: Image.asset(
-                    likedImages[index],
+                    widget.likedImages[index],
                     width: 50,
                     height: 50,
                     fit: BoxFit.cover,
@@ -54,7 +63,7 @@ class MylikeScreen extends StatelessWidget {
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      _removeImage(context, likedImages[index]);
+                      _removeImage(context, widget.likedImages[index]);
                     },
                   ),
                 );
