@@ -17,6 +17,10 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController _majorController = TextEditingController();
   TextEditingController _mbtiController = TextEditingController();
 
+  void _signUp() {
+    // 회원가입 로직을 구현하지 못했음
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,6 +141,11 @@ class _SignupPageState extends State<SignupPage> {
                   }
                 });
               },
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: _signUp,
+              child: Text('회원가입'),
             ),
           ],
         ),
