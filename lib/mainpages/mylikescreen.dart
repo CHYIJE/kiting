@@ -11,38 +11,22 @@ class MylikeScreen extends StatefulWidget {
 }
 
 class _MylikeScreenState extends State<MylikeScreen> {
+  List<String> _likedImages = [];
 
   void _removeImage(BuildContext context, String imagePath) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Delete Image'),
-          content: Text('Are you sure you want to delete this image?'),
-          actions: [
-            TextButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Delete'),
-              onPressed: () {
-                Navigator.of(context).pop(imagePath);
-              },
-            ),
-          ],
-        );
-      },
-    );
+    setState(() {
+      _likedImages.remove(imagePath);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _likedImages = widget.likedImages;
   }
 
   @override
   Widget build(BuildContext context) {
-
-    print(widget.likedImages);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('My Likes'),
@@ -51,20 +35,36 @@ class _MylikeScreenState extends State<MylikeScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: widget.likedImages.length,
+              itemCount: _likedImages.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: Image.asset(
-                    widget.likedImages[index],
+                    _likedImages[index],
                     width: 50,
                     height: 50,
                     fit: BoxFit.cover,
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      _removeImage(context, widget.likedImages[index]);
-                    },
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.chat),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ShowGridScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          _removeImage(context, _likedImages[index]);
+                        },
+                      ),
+                    ],
                   ),
                 );
               },

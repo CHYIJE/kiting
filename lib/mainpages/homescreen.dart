@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   // 첫 번째 사진
                   Container(
-                    width: 450, // 이미지의 고정된 너비
-                    height: 450, // 이미지의 고정된 높이
+                    width: 300, // 이미지의 고정된 너비
+                    height: 300, // 이미지의 고정된 높이
                     child: Image.asset(
                       firstImagePath,
                       fit: BoxFit.contain, // 이미지의 비율을 유지한 채로 화면에 맞춤
@@ -66,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   // 두 번째 사진
                   Container(
-                    width: 400, // 이미지의 고정된 너비
-                    height: 400, // 이미지의 고정된 높이
+                    width: 200, // 이미지의 고정된 너비
+                    height: 200, // 이미지의 고정된 높이
                     child: Image.asset(
                       secondImagePath,
                       fit: BoxFit.contain, // 이미지의 비율을 유지한 채로 화면에 맞춤
